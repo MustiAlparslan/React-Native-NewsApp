@@ -1,8 +1,6 @@
 import { useRoute, RouteProp } from "@react-navigation/native";
 import React, { useState, useEffect } from "react";
 import {
-  Dimensions,
-  FlatList,
   Image,
   Linking,
   ScrollView,
@@ -12,6 +10,7 @@ import {
   View,
 } from "react-native";
 import { dateFormat } from "../constants/dateFormat";
+import useWindowSize from "../hooks/useWindowSize";
 
 type RouteParams = {
   NewsDetails: {
@@ -26,16 +25,15 @@ type RouteParams = {
     };
   };
 };
-const windowWidth = Dimensions.get("window").width;
 
 const NewsDetails = () => {
   const { params } = useRoute<RouteProp<RouteParams, "NewsDetails">>();
-
+  const { width } = useWindowSize();
   return (
     <View>
-      <TouchableHighlight onPress={() =>  Linking.openURL(params.details.url)}>
+      <TouchableHighlight onPress={() => Linking.openURL(params.details.url)}>
         <Image
-          style={{ width: windowWidth, height: 250 }}
+          style={{ width: width, height: 250 }}
           source={{ uri: params.details.urlToImage }}
         />
       </TouchableHighlight>

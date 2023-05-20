@@ -1,19 +1,10 @@
-import React, { useState, useEffect } from "react";
-import {
-  FlatList,
-  StyleSheet,
-  Text,
-  View,
-  ScrollView,
-  Dimensions,
-  ImageBackground,
-  TouchableHighlight,
-} from "react-native";
+import React from "react";
+import { StyleSheet, View, ScrollView } from "react-native";
 import Category from "../components/categories/category";
 
 const Categories = () => {
   return (
-    <ScrollView style={{ flex: 1 }}>
+    <ScrollView style={{ flex: 1}}>
       <View style={styles.container}>
         <Category title="Bitcoin" icon="bitcoin" />
         <Category title="Economy" icon="economy" />
@@ -27,7 +18,7 @@ const Categories = () => {
         <Category title="Media" icon="media" />
         <Category title="Magazine" icon="magazine" />
         <Category title="Education" icon="education" />
-        <Category title="Car" icon="car" />
+        <Category title="Cars" icon="car" />
       </View>
     </ScrollView>
   );
@@ -39,8 +30,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-between",
-    paddingVertical: 5,
+    paddingVertical: 10,
     paddingHorizontal: 4,
+    marginBottom: 80
   },
 });
 

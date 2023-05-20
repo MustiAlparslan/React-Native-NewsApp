@@ -1,8 +1,8 @@
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { TouchableOpacity, View, Text, Image, StyleSheet } from "react-native";
-import { Dimensions } from "react-native";
 import { StackNavigationProp } from "@react-navigation/stack";
+import useWindowSize from "../../hooks/useWindowSize";
 
 type Props = {
   item: {
@@ -19,11 +19,10 @@ type RootStackParamList = {
 
 type navigationProp = StackNavigationProp<RootStackParamList, "NewsDetails">;
 
-const windowWidth = Dimensions.get("window").width;
-const windowHeight = Dimensions.get("window").height;
 
 const NewsItem: React.FC<Props> = ({ item, height}) => {
   const navigation = useNavigation<navigationProp>();
+  const {width} = useWindowSize();
   return (
     <TouchableOpacity
       onPress={() =>
@@ -31,10 +30,10 @@ const NewsItem: React.FC<Props> = ({ item, height}) => {
           details: item,
         })
       }
-      style={styles.container}
+      style={{...styles.container, height: height}}
     >
       <Image
-        style={{ borderRadius: 10, width: windowWidth - 30, height: height, backgroundColor: "#ccc", }}
+        style={{ borderRadius: 10, width: width - 30, height: height, backgroundColor: "#ccc", }}
         source={{ uri: item.urlToImage }}
       />
       <View

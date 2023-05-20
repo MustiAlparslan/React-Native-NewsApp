@@ -7,11 +7,9 @@ import {
   ScrollView,
   Dimensions,
 } from "react-native";
-import { GET_TRENDING_TOPICS, GET_BY_NAME_NEWS } from "../api/requests";
-import NewsItem from "../components/home/newsItem";
+import { GET_TRENDING_TOPICS, GET_NEWS_BY_CHANNEL } from "../api/requests";
 import NewsSection from "../components/home/NewsSection";
 
-const windowWidth = Dimensions.get("window").width;
 
 const Home = () => {
   const [news, setNews] = useState([]);
@@ -25,17 +23,17 @@ const Home = () => {
   };
 
   const getBBCNews = async () => {
-    const RESPONSE = await GET_BY_NAME_NEWS("bbc-news");
+    const RESPONSE = await GET_NEWS_BY_CHANNEL("bbc-news");
     if (RESPONSE.status === "ok") setBBC(RESPONSE?.articles);
   };
 
   const getCNNNews = async () => {
-    const RESPONSE = await GET_BY_NAME_NEWS("CNN");
+    const RESPONSE = await GET_NEWS_BY_CHANNEL("CNN");
     if (RESPONSE.status === "ok") setCNN(RESPONSE?.articles);
   };
 
   const getNBCNews = async () => {
-    const RESPONSE = await GET_BY_NAME_NEWS("nbc-news");
+    const RESPONSE = await GET_NEWS_BY_CHANNEL("nbc-news");
     if (RESPONSE.status === "ok") setNBC(RESPONSE?.articles);
   };
 
@@ -44,12 +42,13 @@ const Home = () => {
     getBBCNews();
     getCNNNews();
     getNBCNews();
+
   }, []);
 
   return (
     <ScrollView>
       {/* Trending Topics */}
-      <NewsSection title={"Trending Topics"} titleSize={21} data={news} useDefaultHeight={true}/>
+      <NewsSection  title={"Trending Topics"} titleColor="#274472" titleWeight="bold" titleSize={21} data={news} useDefaultHeight={true}/>
 
       {/* BBC */}
       <NewsSection title={"BBC News"} titleSize={16} data={bbc} />

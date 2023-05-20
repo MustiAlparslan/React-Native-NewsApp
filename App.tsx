@@ -11,6 +11,8 @@ import NewsDetails from "./src/screens/NewsDetails";
 import "react-native-gesture-handler";
 import Categories from "./src/screens/Categories";
 import CategoryDetails from "./src/screens/CategoryDetails";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import { Fragment } from "react";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -18,16 +20,62 @@ const windowWidth = Dimensions.get("window").width;
 
 const BottomTab = () => {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator
+      screenOptions={{
+        tabBarShowLabel: false,
+        tabBarStyle: {
+          position: "absolute",
+          bottom: 15,
+          left: 25,
+          right: 20,
+          backgroundColor: "#fff",
+          borderRadius: 15,
+          height: 80,
+          ...styles.shadow,
+        },
+      }}
+    >
       <Tab.Screen
         name="Home"
         component={Home}
-        options={{ headerShown: false }}
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ color, focused }) => (
+            <Fragment>
+              <Icon name="home" color={focused ? "#274472" : color} size={26} />
+              <Text
+                style={{fontWeight: '500', fontSize: 12, color: focused ? "#274472" : color }}
+              >
+                Home
+              </Text>
+            </Fragment>
+          ),
+        }}
       />
-       <Tab.Screen
+      <Tab.Screen
         name="Categories"
         component={Categories}
-        options={{ headerShown: false }}
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ color, focused }) => (
+            <Fragment>
+              <Icon
+                name="card-multiple"
+                color={focused ? "#274472" : color}
+                size={26}
+              />
+              <Text
+                style={{
+                  fontWeight: "500",
+                  fontSize: 12,
+                  color: focused ? "#274472" : color,
+                }}
+              >
+                Categories
+              </Text>
+            </Fragment>
+          ),
+        }}
       />
     </Tab.Navigator>
   );
@@ -62,17 +110,18 @@ export default function App() {
               },
             }}
           />
-           <Stack.Screen
+          <Stack.Screen
             name="CategoryDetails"
             component={CategoryDetails}
-            options={{
-              headerTransparent: true,
-              headerTintColor: "#fff",
-              headerTitle: "",
+            options={({ route }) => ({
+              gestureEnabled: false,
+              headerShadowVisible: true,
+              headerTintColor: "#000",
+              headerTitle: route.params.title,
               headerStyle: {
                 backgroundColor: "transparent",
               },
-            }}
+            })}
           />
         </Stack.Navigator>
       </NavigationContainer>
@@ -84,5 +133,15 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  shadow: {
+    shadowColor: "#274472",
+    shadowOffset: {
+      width: 0,
+      height: 10,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.5,
+    elevation: 5,
   },
 });

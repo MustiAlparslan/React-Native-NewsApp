@@ -1,11 +1,7 @@
 import React from "react";
 import {
-  FlatList,
   StyleSheet,
   Text,
-  View,
-  ScrollView,
-  Dimensions,
   ImageBackground,
   TouchableHighlight,
 } from "react-native";
@@ -23,23 +19,22 @@ import {
   TECHNOLOGY_ICON,
   WORD_ICON,
 } from "../../constants/icons";
-import { NavigationProp, useNavigation } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
+import useWindowSize from "../../hooks/useWindowSize";
 
 type Props = {
   icon: string;
   title: string;
 };
 type navigationProps = {
-    CategoryDetails: { title: string };
-    
-}
+  CategoryDetails: { title: string };
+};
 type navigationProp = StackNavigationProp<navigationProps, "CategoryDetails">;
 
-const windowWidth = Dimensions.get("window").width;
-
 const Category: React.FC<Props> = ({ title, icon }) => {
-    const navigation = useNavigation<navigationProp>()
+  const navigation = useNavigation<navigationProp>();
+  const { width } = useWindowSize();
   const selectedCategory = (icon: string) => {
     switch (icon.toLowerCase()) {
       case "bitcoin":
@@ -72,19 +67,21 @@ const Category: React.FC<Props> = ({ title, icon }) => {
   };
 
   return (
-    <TouchableHighlight onPress={() => navigation.navigate("CategoryDetails",{title: title})}>
+    <TouchableHighlight
+      onPress={() => navigation.navigate("CategoryDetails", { title: title })}
+    >
       <ImageBackground
         resizeMode="cover"
         imageStyle={{ width: "100%", opacity: 0.9, borderRadius: 12 }}
         source={{ uri: selectedCategory(icon) }}
         style={{
-          width: (windowWidth / 2) - 10,
+          width: width / 2 - 10,
           height: 135,
           justifyContent: "center",
           alignItems: "center",
           backgroundColor: "#000",
           borderRadius: 12,
-          marginBottom: 5,
+          marginBottom: 20,
         }}
       >
         <Text

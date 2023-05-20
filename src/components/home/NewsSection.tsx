@@ -12,6 +12,7 @@ import NewsItem from "./newsItem";
 type SectionProps = {
   title: string;
   titleSize: number;
+  titleColor?: string;
   data: {
     author: string;
     title: string;
@@ -24,13 +25,21 @@ type SectionProps = {
 const NewsSection: React.FC<SectionProps> = ({
   title,
   titleSize,
+  titleColor,
   data,
   useDefaultHeight,
-  titleWeight
+  titleWeight,
 }) => {
   return (
     <View style={{ marginVertical: 15, paddingHorizontal: 10 }}>
-      <Text style={{ fontSize: titleSize, marginBottom: 3, fontWeight: "500" }}>
+      <Text
+        style={{
+          color: titleColor,
+          fontSize: titleSize,
+          marginBottom: 3,
+          fontWeight: titleWeight == "bold"   ? 'bold' :  "500",
+        }}
+      >
         {title}
       </Text>
       <FlatList
