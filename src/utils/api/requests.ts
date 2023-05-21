@@ -33,13 +33,11 @@ export const GET_NEWS_BY_CHANNEL = async (channel: string) => {
 
 export const GET_CATEGORY_BY_NAME = async (categoryName: string) => {
   try {
-    console.log(categoryName)
     const RESPONSE = await instance.get(
       `/v2/everything?pageSize=50&q=${categoryName}`
     );
     return RESPONSE.data;
   } catch (err) {
-    console.log(err);
     let error = err as AxiosError;
     console.log(error?.response?.data);
     return error?.response?.data || error.message;
