@@ -1,4 +1,4 @@
-# Project Title
+# React-Native-NewsApp
 
 This is a short description of your project. It should explain what your project does and how it does it.
 
