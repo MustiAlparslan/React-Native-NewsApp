@@ -56,9 +56,9 @@ To run the app, follow these steps:
     # yarn android
     ```
 
-## Contributing to <Project_Name>
+## Contributing to React-Native-NewsApp
 
-To contribute to <Project_Name>, follow these steps:
+To contribute to React-Native-NewsApp, follow these steps:
 
 1. Fork this repository.
 2. Create a branch: `git checkout -b <branch_name>`.
