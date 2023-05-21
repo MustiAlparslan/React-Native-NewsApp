@@ -1,9 +1,10 @@
 import { RouteProp, useRoute } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, Image, ActivityIndicator } from "react-native";
-import { GET_CATEGORY_BY_NAME } from "../api/requests";
+import { GET_CATEGORY_BY_NAME } from "../utils/api/requests";
 import CategoryItem from "../components/categories/categoryItem";
 import { FlatList } from "react-native-gesture-handler";
+import { PageType } from "../utils/pages";
 
 type RouteParams = {
   CategoryDetails: {
@@ -12,14 +13,13 @@ type RouteParams = {
 };
 
 const CategoryDetails = () => {
-  const { params } = useRoute<RouteProp<RouteParams, "CategoryDetails">>();
+  const { params } = useRoute<RouteProp<RouteParams, PageType.CATEGORY_DETAILS>>();
   const [categoryData, setCategoryData] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const getCategoryByName = async () => {
     setLoading(true);
-    const RESPONSE = await GET_CATEGORY_BY_NAME(
-      params?.title.toLowerCase());
+    const RESPONSE = await GET_CATEGORY_BY_NAME(params?.title.toLowerCase())
     if (RESPONSE.status === "ok") setCategoryData(RESPONSE?.articles);
     setLoading(false);
   };

@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  FlatList,
-  StyleSheet,
-  Text,
-  View,
-  ScrollView,
-  Dimensions,
-} from "react-native";
+import { FlatList, Text, View } from "react-native";
 import NewsItem from "./newsItem";
 
 type SectionProps = {
@@ -37,7 +30,7 @@ const NewsSection: React.FC<SectionProps> = ({
           color: titleColor,
           fontSize: titleSize,
           marginBottom: 3,
-          fontWeight: titleWeight == "bold"   ? 'bold' :  "500",
+          fontWeight: titleWeight == "bold" ? "bold" : "500",
         }}
       >
         {title}

@@ -2,22 +2,15 @@ import React from "react";
 import {
   View,
   Text,
-  Image,
-  ScrollView,
   StyleSheet,
   ImageBackground,
 } from "react-native";
 import useWindowSize from "../../hooks/useWindowSize";
-import { dateFormat } from "../../constants/dateFormat";
+import { dateFormat } from "../../utils/dateFormat";
+import { DATA } from "../../types";
 
 type Props = {
-  item: {
-    urlToImage: string;
-    title: string;
-    content: string;
-    description: string;
-    publishedAt: string;
-  };
+  item: DATA;
 };
 
 const CategoryItem: React.FC<Props> = ({ item }) => {
@@ -70,14 +63,7 @@ const CategoryItem: React.FC<Props> = ({ item }) => {
           <Text>{item.content}</Text>
         </View>
         <View style={{ paddingBottom: 10, paddingTop: 25 }}>
-          <Text
-            style={{
-              color: "#0008",
-              fontSize: 14,
-              fontWeight: "500",
-              textAlign: "right",
-            }}
-          >
+          <Text style={styles.dateText}>
             {dateFormat(item.publishedAt, false)}
           </Text>
         </View>
@@ -93,6 +79,12 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     marginVertical: 15,
     borderRadius: 20,
+  },
+  dateText: {
+    color: "#0008",
+    fontSize: 14,
+    fontWeight: "500",
+    textAlign: "right",
   },
 });
 export default CategoryItem;

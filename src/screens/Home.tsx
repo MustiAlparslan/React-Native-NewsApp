@@ -1,21 +1,15 @@
 import React, { useState, useEffect } from "react";
+import { ScrollView, View } from "react-native";
 import {
-  FlatList,
-  StyleSheet,
-  Text,
-  View,
-  ScrollView,
-  Dimensions,
-} from "react-native";
-import { GET_TRENDING_TOPICS, GET_NEWS_BY_CHANNEL } from "../api/requests";
+  GET_TRENDING_TOPICS,
+  GET_NEWS_BY_CHANNEL,
+} from "../utils/api/requests";
 import NewsSection from "../components/home/NewsSection";
-
+import { useCategoryStore } from "../stores/categories";
 
 const Home = () => {
-  const [news, setNews] = useState([]);
-  const [bbc, setBBC] = useState([]);
-  const [cnn, setCNN] = useState([]);
-  const [nbc, setNBC] = useState([]);
+  const { news, bbc, cnn, nbc, setNews, setBBC, setCNN, setNBC } =
+    useCategoryStore();
 
   const getTrendingTopics = async () => {
     const RESPONSE = await GET_TRENDING_TOPICS();
@@ -42,22 +36,30 @@ const Home = () => {
     getBBCNews();
     getCNNNews();
     getNBCNews();
-
   }, []);
 
   return (
-    <ScrollView>
-      {/* Trending Topics */}
-      <NewsSection  title={"Trending Topics"} titleColor="#274472" titleWeight="bold" titleSize={21} data={news} useDefaultHeight={true}/>
+    <ScrollView style={{ flex: 1 }}>
+      <View style={{flex: 1, marginBottom: 80}}>
+        {/* Trending Topics */}
+        <NewsSection
+          title={"Trending Topics"}
+          titleColor="#274472"
+          titleWeight="bold"
+          titleSize={21}
+          data={news}
+          useDefaultHeight={true}
+        />
 
-      {/* BBC */}
-      <NewsSection title={"BBC News"} titleSize={16} data={bbc} />
+        {/* BBC */}
+        <NewsSection title={"BBC News"} titleSize={16} data={bbc} />
 
-      {/* CNN */}
-      <NewsSection title={"CNN"} titleSize={16} data={cnn} />
+        {/* CNN */}
+        <NewsSection title={"CNN"} titleSize={16} data={cnn} />
 
-      {/* NBC */}
-      <NewsSection title={"NBC"} titleSize={16} data={nbc} />
+        {/* NBC */}
+        <NewsSection title={"NBC"} titleSize={16} data={nbc} />
+      </View>
     </ScrollView>
   );
 };

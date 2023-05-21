@@ -1,5 +1,5 @@
 import { useRoute, RouteProp } from "@react-navigation/native";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import {
   Image,
   Linking,
@@ -9,26 +9,21 @@ import {
   TouchableHighlight,
   View,
 } from "react-native";
-import { dateFormat } from "../constants/dateFormat";
+import { dateFormat } from "../utils/dateFormat";
 import useWindowSize from "../hooks/useWindowSize";
+import { DATA } from "../types";
+import { PageType } from "../utils/pages";
 
 type RouteParams = {
   NewsDetails: {
-    details: {
-      urlToImage: string;
-      title: string;
-      publishedAt: string;
-      description: string;
-      content: string;
-      author: string;
-      url: string;
-    };
+    details: DATA;
   };
 };
 
 const NewsDetails = () => {
-  const { params } = useRoute<RouteProp<RouteParams, "NewsDetails">>();
+  const { params } = useRoute<RouteProp<RouteParams, PageType.NEWS_DETAILS>>();
   const { width } = useWindowSize();
+
   return (
     <View>
       <TouchableHighlight onPress={() => Linking.openURL(params.details.url)}>
@@ -46,20 +41,7 @@ const NewsDetails = () => {
             marginBottom: 15,
           }}
         >
-          <Text
-            style={{
-              textAlign: "center",
-              fontWeight: "600",
-              paddingHorizontal: 5,
-              paddingVertical: 2,
-              borderRadius: 4,
-              backgroundColor: "#0E86D4",
-              color: "#fff",
-              width: 50,
-            }}
-          >
-            News
-          </Text>
+          <Text style={styles.newsBox}>News</Text>
           <Text style={{ color: "#BDC3CB", fontSize: 14, fontWeight: "500" }}>
             {dateFormat(params.details.publishedAt)}
           </Text>
@@ -85,18 +67,32 @@ const NewsDetails = () => {
             </Text>
           </View>
           <View style={{ marginBottom: 10 }}>
-            <Text style={{}}>{params.details.content}</Text>
+            <Text>{params.details.content}</Text>
           </View>
 
-          <View>
-            <Text style={{ fontSize: 12, color: "#BDC3CB" }}>
-              Source - {params.details.author}
-            </Text>
-          </View>
+          {params.details.author && (
+            <View>
+              <Text style={{ fontSize: 12, color: "#BDC3CB" }}>
+                Source - {params.details.author}
+              </Text>
+            </View>
+          )}
         </View>
       </ScrollView>
     </View>
   );
 };
 
+const styles = StyleSheet.create({
+  newsBox: {
+    textAlign: "center",
+    fontWeight: "600",
+    paddingHorizontal: 5,
+    paddingVertical: 2,
+    borderRadius: 4,
+    backgroundColor: "#0E86D4",
+    color: "#fff",
+    width: 50,
+  },
+});
 export default NewsDetails;

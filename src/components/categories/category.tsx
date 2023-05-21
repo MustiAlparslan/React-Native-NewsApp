@@ -4,6 +4,7 @@ import {
   Text,
   ImageBackground,
   TouchableHighlight,
+  TouchableOpacity,
 } from "react-native";
 import {
   BITCOIN_ICON,
@@ -18,10 +19,12 @@ import {
   SPORTS_ICON,
   TECHNOLOGY_ICON,
   WORD_ICON,
-} from "../../constants/icons";
+} from "../../icons";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import useWindowSize from "../../hooks/useWindowSize";
+import { PageType } from "../../utils/pages";
+import { CategoryType } from "../../types";
 
 type Props = {
   icon: string;
@@ -30,36 +33,40 @@ type Props = {
 type navigationProps = {
   CategoryDetails: { title: string };
 };
-type navigationProp = StackNavigationProp<navigationProps, "CategoryDetails">;
+type navigationProp = StackNavigationProp<
+  navigationProps,
+  PageType.CATEGORY_DETAILS
+>;
 
 const Category: React.FC<Props> = ({ title, icon }) => {
   const navigation = useNavigation<navigationProp>();
   const { width } = useWindowSize();
+
   const selectedCategory = (icon: string) => {
     switch (icon.toLowerCase()) {
-      case "bitcoin":
+      case CategoryType.BITCOIN:
         return BITCOIN_ICON;
-      case "economy":
+      case CategoryType.ECONOMY:
         return ECONOMY_ICON;
-      case "word":
+      case CategoryType.WORD:
         return WORD_ICON;
-      case "sports":
+      case CategoryType.SPORTS:
         return SPORTS_ICON;
-      case "technology":
+      case CategoryType.TECHNOLOGY:
         return TECHNOLOGY_ICON;
-      case "science":
+      case CategoryType.SCIENCE:
         return SCIENCE_ICON;
-      case "healthy":
+      case CategoryType.HEALTHY:
         return HEALTHY_ICON;
-      case "politics":
+      case CategoryType.POLITICS:
         return POLITICS_ICON;
-      case "media":
+      case CategoryType.MEDIA:
         return MEDIA_ICON;
-      case "magazine":
+      case CategoryType.MAGAZINE:
         return MAGAZINE_ICON;
-      case "education":
+      case CategoryType.EDUCATION:
         return EDUCATION_ICON;
-      case "car":
+      case CategoryType.CAR:
         return CAR_ICON;
       default:
         return "";
@@ -67,36 +74,38 @@ const Category: React.FC<Props> = ({ title, icon }) => {
   };
 
   return (
-    <TouchableHighlight
-      onPress={() => navigation.navigate("CategoryDetails", { title: title })}
+    <TouchableOpacity
+      style={{ marginBottom: 20 }}
+      onPress={() =>
+        navigation.navigate(PageType.CATEGORY_DETAILS, { title: title })
+      }
     >
       <ImageBackground
         resizeMode="cover"
         imageStyle={{ width: "100%", opacity: 0.9, borderRadius: 12 }}
         source={{ uri: selectedCategory(icon) }}
-        style={{
-          width: width / 2 - 10,
-          height: 135,
-          justifyContent: "center",
-          alignItems: "center",
-          backgroundColor: "#000",
-          borderRadius: 12,
-          marginBottom: 20,
-        }}
+        style={{ width: width / 2 - 10, ...styles.imageBackground }}
       >
-        <Text
-          style={{
-            fontSize: 24,
-            fontFamily: "Roboto",
-            color: "#fff",
-            fontWeight: "bold",
-          }}
-        >
-          {title}
-        </Text>
+        <Text style={styles.title}>{title}</Text>
       </ImageBackground>
-    </TouchableHighlight>
+    </TouchableOpacity>
   );
 };
+
+const styles = StyleSheet.create({
+  imageBackground: {
+    height: 135,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#000",
+    borderRadius: 12,
+  },
+  title: {
+    fontSize: 24,
+    fontFamily: "Roboto",
+    color: "#fff",
+    fontWeight: "bold",
+  },
+});
 
 export default Category;

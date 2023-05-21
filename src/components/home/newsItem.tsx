@@ -3,6 +3,7 @@ import React from "react";
 import { TouchableOpacity, View, Text, Image, StyleSheet } from "react-native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import useWindowSize from "../../hooks/useWindowSize";
+import { PageType } from "../../utils/pages";
 
 type Props = {
   item: {
@@ -17,7 +18,7 @@ type RootStackParamList = {
   NewsDetails: { details: object };
 };
 
-type navigationProp = StackNavigationProp<RootStackParamList, "NewsDetails">;
+type navigationProp = StackNavigationProp<RootStackParamList, PageType.NEWS_DETAILS>;
 
 
 const NewsItem: React.FC<Props> = ({ item, height}) => {
@@ -26,7 +27,7 @@ const NewsItem: React.FC<Props> = ({ item, height}) => {
   return (
     <TouchableOpacity
       onPress={() =>
-        navigation.navigate("NewsDetails", {
+        navigation.navigate(PageType.NEWS_DETAILS, {
           details: item,
         })
       }
