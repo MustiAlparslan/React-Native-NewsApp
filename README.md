@@ -74,9 +74,9 @@ To run the app, follow these steps:
 
 <p float="left">
   <img src="https://github.com/MustiAlparslan/React-Native-NewsApp/assets/98889289/384a5da6-47a7-4195-9e5f-01d0e369568b" width="200" />
+   <img src="https://github.com/MustiAlparslan/React-Native-NewsApp/assets/98889289/a4d5408e-ce14-41a6-b572-73a3e50bafe1" width="200" />
   <img src="https://github.com/MustiAlparslan/React-Native-NewsApp/assets/98889289/f1b24598-7c85-4ead-b88d-7f8d70974c37" width="200" /> 
   <img src="https://github.com/MustiAlparslan/React-Native-NewsApp/assets/98889289/f88f0647-d460-4b59-8986-589710eb23aa" width="200" />
-  <img src="https://github.com/MustiAlparslan/React-Native-NewsApp/assets/98889289/a4d5408e-ce14-41a6-b572-73a3e50bafe1" width="200" />
 </p>
 
 ## Contributing to React-Native-NewsApp
