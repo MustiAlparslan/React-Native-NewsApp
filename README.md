@@ -1,6 +1,6 @@
 # React-Native-NewsApp
 
-This is a short description of your project. It should explain what your project does and how it does it.
+I've developed a mobile application using React Native Expo and NewsAPI. It features daily data updates and encompasses a wide range of categories.
 
 ## Prerequisites
 
