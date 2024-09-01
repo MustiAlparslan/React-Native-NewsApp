@@ -4,6 +4,7 @@ import axios, { AxiosError } from "axios";
 const instance = axios.create({
   baseURL: "https://newsapi.org",
   headers: { "X-API-KEY": API_KEY },
+  
 });
 
 export const GET_TRENDING_TOPICS = async () => {
